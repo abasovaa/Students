@@ -1,7 +1,6 @@
 package kg.megacom.Students.models;
 
-import kg.megacom.Students.enums.PaymentStatusEnum;
-import kg.megacom.Students.enums.StudentGroupEnum;
+import kg.megacom.Students.enums.StudentEnum;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
@@ -31,5 +30,5 @@ public class StudentGroup {
     Group group;
 
     @Enumerated(value = EnumType.STRING)
-    StudentGroupEnum status;
+    StudentEnum status;
 }

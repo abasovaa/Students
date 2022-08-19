@@ -9,6 +9,13 @@ public class CourseMapperImpl implements CourseMapper {
 
     @Override
     public Course fromDto(CourseDto courseDto) {
+
+        long id;
+        String title;
+        double price;
+        String duration;
+
+
         return null;
     }
 
