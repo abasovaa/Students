@@ -21,4 +21,6 @@ public class Student {
     String name;
     String surname;
     String title;
+    @Column(name="is_deleted")
+    private boolean isDeleted;
 }

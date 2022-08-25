@@ -1,14 +1,14 @@
 package kg.megacom.Students.controllers;
 
+import kg.megacom.Students.models.Dto.StudentDto;
 import kg.megacom.Students.models.Student;
 import kg.megacom.Students.services.StudentService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/student")
 
 public class StudentController {
 
@@ -18,10 +18,26 @@ public class StudentController {
         this.studentService = studentService;
     }
 
-    @PostMapping("/create")
+    @PostMapping("/createStudent")
 
-    public Student createStudent(@RequestBody Student student){
+    public StudentDto createStudent(@RequestBody Student student){
 
         return studentService.createStudent(student);
     }
+
+    @GetMapping("/findAll")
+    public List<StudentDto>findAll(){
+        return studentService.findAll();
+    }
+
+    @PutMapping("/update")
+    public Student updateStudent(@RequestParam Long id, @RequestParam String title){
+        return studentService.update(id, title);
+    }
+
+    @DeleteMapping("/delete")
+    void delete(@RequestParam Long id){
+        studentService.delete(id);
+    }
+
 }

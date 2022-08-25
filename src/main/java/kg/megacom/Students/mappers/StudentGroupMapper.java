@@ -1,15 +1,27 @@
 package kg.megacom.Students.mappers;
 
-import kg.megacom.Students.Dto.StudentGroupDto;
+import kg.megacom.Students.models.Dto.StudentGroupDto;
 import kg.megacom.Students.models.StudentGroup;
+import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
+import org.springframework.stereotype.Component;
 
-import java.util.List;
+import java.util.Objects;
 
-public interface StudentGroupMapper {
+@Component
+@RequiredArgsConstructor
+public class StudentGroupMapper {
 
-    StudentGroup fromDto(StudentGroupDto studentGroupDto);
-    StudentGroupDto toDto(StudentGroup studentGroup);
+   private final ModelMapper modelMapper;
 
-    List<StudentGroup> fromDtos(List<StudentGroupDto> studentDto);
-    List<StudentGroupDto> toDtos(List<StudentGroup> students);
+   public StudentGroup toEntity(StudentGroupDto studentGroupDto){
+       return Objects.isNull(studentGroupDto)? null : modelMapper.map(studentGroupDto,StudentGroup.class);
+
+    }
+
+    public StudentGroupDto toDto(StudentGroup studentGroup){
+        return Objects.isNull(studentGroup)? null : modelMapper.map(studentGroup,StudentGroupDto.class);
+
+    }
+
 }

@@ -1,4 +1,4 @@
-package kg.megacom.Students.enums;
+package kg.megacom.Students.models.enums;
 
 public enum PaymentStatusEnum {
 

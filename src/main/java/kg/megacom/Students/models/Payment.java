@@ -1,6 +1,6 @@
 package kg.megacom.Students.models;
 
-import kg.megacom.Students.enums.PaymentStatusEnum;
+import kg.megacom.Students.models.enums.PaymentStatusEnum;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
@@ -20,8 +20,6 @@ public class Payment {
 
     long id;
     String paymentDate;
-    String surname;
-    String title;
 
     @ManyToOne
     @JoinColumn (name = "student_id")

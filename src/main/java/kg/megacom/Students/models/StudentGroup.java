@@ -1,11 +1,12 @@
 package kg.megacom.Students.models;
 
-import kg.megacom.Students.enums.StudentEnum;
+import kg.megacom.Students.models.enums.StudentEnum;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
+import java.util.Date;
 
 
 @Data
@@ -18,8 +19,8 @@ public class StudentGroup {
             @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     long id;
-    String startDate;
-    String endDate;
+    Date startDate;
+    Date endDate;
 
     @ManyToOne
     @JoinColumn (name = "student_id")
