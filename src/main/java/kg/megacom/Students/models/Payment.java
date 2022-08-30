@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -18,8 +19,8 @@ public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    long id;
-    String paymentDate;
+    Long id;
+    Date paymentDate;
 
     @ManyToOne
     @JoinColumn (name = "student_id")

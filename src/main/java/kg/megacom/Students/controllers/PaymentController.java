@@ -12,6 +12,7 @@ import java.util.List;
 
 public class PaymentController {
 
+/*
     private final PaymentService paymentService;
 
     public PaymentController(PaymentService paymentService) {
@@ -38,4 +39,5 @@ public class PaymentController {
 
     @DeleteMapping("/delete")
     void delete(@RequestParam Long id){ paymentService.delete(id);}
+*/
 }

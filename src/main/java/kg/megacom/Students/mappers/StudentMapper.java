@@ -13,12 +13,10 @@ import java.util.stream.Collectors;
 @Component
 @RequiredArgsConstructor
 public class StudentMapper {
-
     private final ModelMapper modelMapper;
 
     public Student toEntity(StudentDto studentDto){
         return Objects.isNull(studentDto) ? null : modelMapper.map(studentDto, Student.class);
-
     }
 
     public StudentDto toDto(Student student){

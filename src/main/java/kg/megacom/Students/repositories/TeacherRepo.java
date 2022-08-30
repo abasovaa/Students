@@ -13,10 +13,4 @@ import javax.transaction.Transactional;
 @Repository
 
 public interface TeacherRepo extends JpaRepository<Teacher, Long> {
-    @Transactional
-    @Modifying (clearAutomatically = true)
-    @Query(value="Update teachers set title=?2 where id=?1", nativeQuery = true)
-    void update(Long id, String title);
-
-
 }

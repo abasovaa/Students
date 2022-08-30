@@ -1,17 +1,11 @@
 package kg.megacom.Students.services;
 
-import kg.megacom.Students.models.Dto.PaymentDto;
+import kg.megacom.Students.models.Group;
 import kg.megacom.Students.models.Payment;
+import kg.megacom.Students.models.Student;
 
 import java.util.List;
 
 public interface PaymentService {
-
-    PaymentDto createPayment(Payment payment);
-
-    List<PaymentDto> findAll();
-
-    Payment update(Long id, String paymentDate);
-
-    void delete(Long id);
+    List<Payment> setPayments(Student student, Group group);
 }

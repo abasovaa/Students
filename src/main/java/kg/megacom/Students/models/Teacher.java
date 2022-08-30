@@ -18,7 +18,7 @@ public class Teacher {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    long id;
+    Long id;
     String name;
     String surname;
     String title;

@@ -19,7 +19,7 @@ import java.util.Date;
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-        long id;
+        Long id;
         String name;
         Date startDate;
         Date endDate;

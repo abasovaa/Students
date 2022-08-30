@@ -13,7 +13,7 @@ import java.util.List;
 
 public class LessonController {
 
-    private final LessonService lessonService;
+    /*private final LessonService lessonService;
 
     public LessonController(LessonService lessonService) {
         this.lessonService = lessonService;
@@ -36,5 +36,5 @@ public class LessonController {
         }
 
         @DeleteMapping("/delete")
-    void delete(@RequestParam Long id){lessonService.delete(id);}
+    void delete(@RequestParam Long id){lessonService.delete(id);}*/
     }

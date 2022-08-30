@@ -1,5 +1,6 @@
 package kg.megacom.Students.controllers;
 
+import kg.megacom.Students.models.StudentGroup;
 import kg.megacom.Students.services.StudentGroupService;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
@@ -25,5 +26,10 @@ private final StudentGroupService studentGroupService;
                                              @RequestParam Long studentId, @RequestParam Long groupId) {
 
         return studentGroupService.create(startDate, endDate, studentId, groupId);
+    }
+
+    @PostMapping("/add")
+    public StudentGroup append(@RequestParam Long studentId, @RequestParam Long groupId){
+        return studentGroupService.append(studentId, groupId);
     }
 }

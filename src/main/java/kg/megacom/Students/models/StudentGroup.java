@@ -18,7 +18,7 @@ public class StudentGroup {
     @Id
             @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    long id;
+    Long id;
     Date startDate;
     Date endDate;
 

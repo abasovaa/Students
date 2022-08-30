@@ -11,7 +11,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Data
-
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor
 @NoArgsConstructor
 

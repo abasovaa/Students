@@ -11,7 +11,7 @@ import java.util.Date;
 import java.util.List;
 
 @Data
-
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor
 @NoArgsConstructor
 

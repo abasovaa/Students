@@ -1,7 +1,6 @@
 package kg.megacom.Students.services.impl;
 
 import kg.megacom.Students.models.Course;
-import kg.megacom.Students.mappers.GroupMapper;
 import kg.megacom.Students.models.Group;
 import kg.megacom.Students.models.Lesson;
 import kg.megacom.Students.models.enums.Day;
@@ -12,115 +11,82 @@ import kg.megacom.Students.services.CourseService;
 import kg.megacom.Students.services.GroupService;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class GroupServiceImpl implements GroupService {
-        private final GroupRepo groupRepo;
 
-        //private final GroupMapper groupMapper;
+    private final GroupRepo groupRepo;
 
-        private final CourseService courseService;
+    private final CourseService courseService;
 
-        private final LessonRepo lessonRepo;
+    private final LessonRepo lessonRepo;
 
-    public GroupServiceImpl(GroupRepo groupRepo, GroupMapper groupMapper, CourseService courseService, LessonRepo lessonRepo){
-        this.groupRepo=groupRepo;
-        //this.groupMapper = groupMapper;
+    public GroupServiceImpl(GroupRepo groupRepo, CourseService courseService, LessonRepo lessonRepo) {
+        this.groupRepo = groupRepo;
         this.courseService = courseService;
         this.lessonRepo = lessonRepo;
     }
 
-       /* @Override
-        public GroupDto createGroup(Group group) {
-           Group newGroup=new Group();
-            newGroup.setId(group.getId());
-            newGroup.setName(group.getName());
-            newGroup.setStartDate(group.getStartDate());
-            newGroup.setEndDate(group.getEndDate());
-            newGroup.setCourse(group.getCourse());
-            newGroup.setTeacher(group.getTeacher());
-
-            groupRepo.save(group);
-
-            return groupMapper.toDto(group);
-    }*/
+    @Override
+    public Group createGroup(Group group) {return  groupRepo.save(group);}
 
     private List<Date> getLessonsDates(List<Day> days, int duration, Date startDate){
         List<Date> dates=new ArrayList<>();
         Calendar calendar=Calendar.getInstance();
         calendar.setTime(startDate);
 
+        //days=[MONDAY, WEDNESDAY, FRIDAY]
+        //[2, 4, 6]
+        //[]
+
         for (int i=0; i<duration;){
-           long count=days
-                   .stream()
-                   .map(x-> x.getDayValue())
-                   .filter(x-> x==calendar.get(Calendar.DAY_OF_WEEK))
-                   .count();
+
+            long count=days
+                    .stream()
+                    .map(x->x.getDayValue())
+                    .filter(x-> x==calendar.get(Calendar.DAY_OF_WEEK))
+                    .count();
+
             if(count==1){
                 i++;
-            }
                 dates.add(calendar.getTime());
+            }
 
-           calendar.add(Calendar.DAY_OF_MONTH, 1);
+            calendar.add(Calendar.DAY_OF_MONTH, 1);
+
         }
-
         return dates;
-    }
-
-    /*@Override
-    public List<GroupDto> findAll() {
-
-        List<Group> groupList=groupRepo.findAll();
-
-        return groupMapper.toDtoList(groupList);
-    }*/
-
-    @Override
-    public Group update(Long id, String name) {
-        Optional<Group> group=Optional.of(groupRepo.findById(id).get());
-        groupRepo.update(id, name);
-
-        return null;
-    }
-
-    @Override
-    public void delete(Long id) {
 
     }
 
     @Override
     public Group create(GroupRequest groupRequest) {
-        //GroupRequest(groupTitle=Java 18:00, courseId=1, startDate=Thu Sep 01 06:00:00 KGT 2022, days=[MONDAY, WEDNESDAY, FRIDAY])
-
-        //Найти курс по ID
-        //duration не должен быть пустой или меньше или равно 0
-        //Получить список дат уроков
-        //insert into groups
-        //insert into lessons
-
 
         Course course=courseService.findById(groupRequest.getCourseId());
-        if (course.getDuration()<=0)
+
+        if(course.getDuration()<=0)
             throw new RuntimeException("Длительность не может быть меньше или равна нулю!");
 
         List<Date> lessonsDates=getLessonsDates(groupRequest.getDays(), course.getDuration(), groupRequest.getStartDate());
 
-        Date maxDate=lessonsDates
-                .stream()
-                .max(Date::compareTo)
-                .get();
+        Date maxDate=lessonsDates.get(lessonsDates.size()-1);
+        Date minDate=lessonsDates.get(0);
 
         Group group=new Group();
         group.setCourse(course);
-        group.setStartDate(groupRequest.getStartDate());
+        group.setStartDate(minDate);
         group.setEndDate(maxDate);
         group.setName(groupRequest.getGroupTitle());
 
         group=groupRepo.save(group);
 
-        Group finalGroup = group;
+        Group finalGroup=group;
+
         List<Lesson> lessons=lessonsDates
                 .stream()
                 .map(x->{
@@ -128,10 +94,15 @@ public class GroupServiceImpl implements GroupService {
                     lesson.setDay(x);
                     lesson.setGroup(finalGroup);
                     return lesson;
-                }).collect(Collectors.toList());
-
+                })
+                .collect(Collectors.toList());
         lessonRepo.saveAll(lessons);
 
         return group;
+    }
+
+    @Override
+    public Group findById(Long id) {
+        return groupRepo.findById(id).orElseThrow(()-> new RuntimeException("Группа не найдена!"));
     }
 }

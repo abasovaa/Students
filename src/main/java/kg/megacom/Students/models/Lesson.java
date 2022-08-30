@@ -19,7 +19,7 @@ public class Lesson {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    long id;
+    Long id;
     Date day;
 
     @ManyToOne

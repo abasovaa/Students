@@ -8,17 +8,16 @@ import lombok.experimental.FieldDefaults;
 
 
 @Data
-
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor
 @NoArgsConstructor
-
-
 public class CourseDto {
 
     long id;
     String title;
     double price;
     String duration;
+    private int period;
 
 }
 

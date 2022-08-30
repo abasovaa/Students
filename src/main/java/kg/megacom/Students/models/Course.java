@@ -8,20 +8,18 @@ import javax.persistence.*;
 
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
-
 @Entity
 @Table(name = "courses")
-
 
 public class Course {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    long id;
+    Long id;
     String title;
     double price;
     int duration;
-
+    int period;
 
 }

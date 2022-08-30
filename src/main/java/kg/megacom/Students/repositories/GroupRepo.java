@@ -11,9 +11,4 @@ import javax.transaction.Transactional;
 @Repository
 
 public interface GroupRepo extends JpaRepository<Group, Long> {
-
-    @Transactional
-    @Modifying(clearAutomatically = true)
-    @Query(value = "Update groups set name=?2 where id=?1", nativeQuery = true)
-    void update(Long id, String name);
 }

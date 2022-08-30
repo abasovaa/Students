@@ -11,9 +11,4 @@ import javax.transaction.Transactional;
 @Repository
 
 public interface PaymentRepo extends JpaRepository<Payment,Long> {
-    @Transactional
-    @Modifying(clearAutomatically = true)
-    @Query(value = "Update payments set paymentDate=?2 where id=?1", nativeQuery = true)
-
-    void update(Long id, String paymentDate);
 }

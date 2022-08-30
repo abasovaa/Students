@@ -1,12 +1,12 @@
 package kg.megacom.Students.controllers;
 
-import kg.megacom.Students.models.Dto.GroupDto;
 import kg.megacom.Students.models.Group;
 import kg.megacom.Students.models.requests.GroupRequest;
 import kg.megacom.Students.services.GroupService;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/v1/group")
@@ -18,31 +18,16 @@ public class GroupController {
         this.groupService = groupService;
     }
 
- /*   @PostMapping("/createGroup")
-
-    public GroupDto createGroup(@RequestBody Group group) {
+    @PostMapping("/createGroup")
+    public Group createGroup(@RequestBody Group group) {
         return groupService.createGroup(group);
     }
-*/
+
     @PostMapping("/create")
-    public Group create(@RequestBody GroupRequest groupRequest){
+    public Group create(@RequestBody GroupRequest groupRequest) {
         return groupService.create(groupRequest);
 
     }
- /* @GetMapping("/findAll")
-
-    public List<GroupDto> findAll(){
-        return groupService.findAll();
-    }*/
-
-    @PutMapping("/update")
-    public Group updateGroup(@RequestParam Long id, @RequestParam String name){
-        return groupService.update(id,name);
-    }
-
-    @DeleteMapping("/delete")
-    void delete(@RequestParam Long id){ groupService.delete(id);}
-
-    }
+}
 
 

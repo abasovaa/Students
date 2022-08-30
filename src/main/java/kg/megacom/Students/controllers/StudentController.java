@@ -9,9 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/student")
-
 public class StudentController {
-
     private final StudentService studentService;
 
     public StudentController(StudentService studentService) {
@@ -20,10 +18,7 @@ public class StudentController {
 
     @PostMapping("/createStudent")
 
-    public StudentDto createStudent(@RequestBody Student student){
-
-        return studentService.createStudent(student);
-    }
+    public StudentDto createStudent(@RequestBody Student student){return studentService.createStudent(student);}
 
     @GetMapping("/findAll")
     public List<StudentDto>findAll(){
@@ -40,4 +35,6 @@ public class StudentController {
         studentService.delete(id);
     }
 
+    @GetMapping("/findAllNotDeleted")
+    public List<Student> findAllNitDeleted(){return studentService.findAllNotDeleted();}
 }
